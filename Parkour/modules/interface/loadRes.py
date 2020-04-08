@@ -1,25 +1,34 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+'''
+@Author: coderShy
+@LastEditors: coderShy
+@LastEditTime: 2020-04-08 10:35:41
+@Description: Load sources
+'''
 
 import pygame
 import consts as cfg
+from copy import deepcopy
 
 
 def load_background():
-    bg_size = cfg.BACKGROUND_IMAGES.get('size')
+    dt = deepcopy(cfg.BACKGROUND_IMAGES)
+    bg_size = dt.get('size')
     if bg_size:
-        cfg.BACKGROUND_IMAGES.pop('size')
+        dt.pop('size')
     return {
         key: pygame.transform.smoothscale(
             pygame.image.load(value).convert_alpha().subsurface(
                 pygame.Rect(*bg_size)), (cfg.SCREEN_WIDTH, cfg.SCREEN_HEIGHT))
-        for key, value in cfg.BACKGROUND_IMAGES.items()
+        for key, value in dt.items()
     }
 
 
 def load_player():
     mc_images = dict()
-    for name, values in cfg.MC_IMAGES.items():
+    mc_dt = deepcopy(cfg.MC_IMAGES)
+    for name, values in mc_dt.items():
         mc_images[name] = {}
         if values.get('image'):
             img_path = values.pop('image')
@@ -61,19 +70,19 @@ def load_resouces():
     background_images = load_background()
     mc_images = load_player()
     nums = load_nums()
-
-    tool1 = pygame.image.load(cfg.TOOL_IMAGE.get('image'))
-    cfg.TOOL_IMAGE.pop('image')
-    tool2 = pygame.image.load(cfg.TOOL_IMAGE2.get('image'))
-    cfg.TOOL_IMAGE2.pop('image')
+    tool_image = deepcopy(cfg.TOOL_IMAGE)
+    tool1 = pygame.image.load(tool_image.get('image'))
+    tool_image.pop('image')
+    tool_image2 = deepcopy(cfg.TOOL_IMAGE2)
+    tool2 = pygame.image.load(tool_image2.get('image'))
+    tool_image2.pop('image')
     tools = {
         k: tool1.subsurface(pygame.Rect(*v))
-        for k, v in cfg.TOOL_IMAGE.items()
+        for k, v in tool_image.items()
     }
-    tools.update({
-        k: tool2.subsurface(pygame.Rect(*v))
-        for k, v in cfg.TOOL_IMAGE2.items()
-    })
+    tools.update(
+        {k: tool2.subsurface(pygame.Rect(*v))
+         for k, v in tool_image2.items()})
 
     sounds = {
         key: pygame.mixer.Sound(value)
