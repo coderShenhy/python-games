@@ -1,13 +1,26 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+'''
+@Author: coderShy
+@LastEditors: coderShy
+@LastEditTime: 2020-04-08 10:32:50
+@Description: Define constants
+'''
 import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
 RESOURCES_PATH = os.path.join(BASE_DIR, 'resources')
+
+ORIGINAL_CAPTION = 'run'
 FPS = 60
 SCREEN_WIDTH = 520
-SCREEN_HEIGHT = 300
-FLOOR_HEIGHT = 50
+SCREEN_HEIGHT = 350
+FLOOR_HEIGHT = 100
+FLOOR_GAP_WIDTH = 150
+FLOOR_GAP_HEIGHT = 30
 BASE_HEIGHT = SCREEN_HEIGHT - FLOOR_HEIGHT
+# floor_width_level, floor_height_level, floor_gap_level
+FLOOR_LIST = [(6, 0, 1), (2, -1, 2), (3, 0, 1), (2, 1, 1)] * 10
 
 BACKGROUND_PATH = os.path.join(RESOURCES_PATH, 'background')
 BACKGROUND_IMAGES = {
@@ -102,7 +115,7 @@ TOOL_IMAGE = {
 
 TOOL_IMAGE2 = {
     'image': os.path.join(RESOURCES_PATH, 'item', 'it2.png'),
-    'floor': (74, 5, 371, 320),
+    'floor': (74, 5, 120, 320),
     'spine1': (535, 2, 130, 436),
     'spine2': (665, 73, 173, 364),
     'fire': (205, 334, 61, 129)
@@ -119,3 +132,10 @@ SOUNDS = {
     'slid': os.path.join(SOUNDS_PATH, 'slid.wav'),
     'bgm': os.path.join(SOUNDS_PATH, 'bgm.wav'),
 }
+
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+
+JUMP_KEY_CODE = 32  # 空格
+SLIDE_KEY_CODE = 83  # s
+CONTINUE_GAME_KEY_CODE = 13  # 回车
