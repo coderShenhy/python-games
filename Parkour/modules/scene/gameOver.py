@@ -3,12 +3,11 @@
 '''
 @Author: coderShy
 @LastEditors: coderShy
-@LastEditTime: 2020-04-08 10:30:43
+@LastEditTime: 2020-04-08 11:45:19
 @Description: Define scene of game over
 '''
 
 from ..tool import Scene
-from ..tool.control import init_game_info
 import consts as cfg
 import pygame
 

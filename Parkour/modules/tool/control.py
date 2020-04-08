@@ -3,7 +3,7 @@
 '''
 @Author: coderShy
 @LastEditors: coderShy
-@LastEditTime: 2020-04-08 10:32:04
+@LastEditTime: 2020-04-08 11:55:28
 @Description: Define control of game
 '''
 #!/usr/bin/env python3
@@ -11,16 +11,6 @@
 import pygame
 import consts as cfg
 from modules.interface.loadRes import load_resouces
-
-
-def init_game_info():
-    return {
-        'current_time': 0.0,
-        'previous_scene': None,
-        'current_scene': 'startMenu',
-        'next_scene': 'gameRun',
-        'next_loading_time': 1500
-    }
 
 
 class Control:
@@ -31,9 +21,8 @@ class Control:
         self.init_event()
         self.scene = None
         self.scene_dict = {}
-        self.scene_name = 'startMenu'
+        self.scene_name = None
         self.current_time = 0.0
-        self.game_info = init_game_info()
 
     def init_game(self):
         pygame.init()
@@ -46,6 +35,13 @@ class Control:
         self.scene_dict = scene_dict
         self.scene_name = start_scene
         self.scene = self.scene_dict[self.scene_name]
+        self.game_info = {
+            'current_time': 0.0,
+            'previous_scene': None,
+            'current_scene': self.scene_name,
+            'next_scene': None,
+            'next_loading_time': 0
+        }
         self.scene.startup(self.current_time, self.game_info, self.sources)
 
     def update(self):
@@ -69,7 +65,10 @@ class Control:
             if event.type == pygame.QUIT:
                 self.done = True
             elif event.type == pygame.KEYDOWN:
-                self.event['key_press'][event.key] = True
+                if event.key == pygame.K_ESCAPE:
+                    self.done = True
+                else:
+                    self.event['key_press'][event.key] = True
             elif event.type == pygame.KEYUP:
                 self.event['key_up'][event.key] = True
             elif event.type == pygame.MOUSEBUTTONDOWN:

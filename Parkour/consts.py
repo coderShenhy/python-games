@@ -3,11 +3,7 @@
 '''
 @Author: coderShy
 @LastEditors: coderShy
-<<<<<<< HEAD
 @LastEditTime: 2020-04-08 10:45:10
-=======
-@LastEditTime: 2020-04-08 10:32:50
->>>>>>> a8fa1c1a61c16f392a0d8bf5a1136dc1193c6de0
 @Description: Define constants
 '''
 import os
